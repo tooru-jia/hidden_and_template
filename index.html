@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" id="form">
+        <label for="name">Name</label>
+        <input type="text" name="name">
+
+        <button type="submit">submit</button>
+    </form>
+
+    <button type="click" id="showhide">show div</button>
+    <button type="click" id="showTemp">show template</button>
+    
+
+    <div hidden class="red">
+        how are you
+    </div>
+
+    <template id="testing">
+        hello
+        
+    </template>
+
+    <script>
+        class Student{
+            constructor(name){
+                this.name = name;
+
+            }
+
+        }
+        class Studentlist{
+            constructor(){
+                this.list = [];
+            }
+            add(student){
+                this.list.push(student)
+
+            }
+            list(){
+                return this.list;
+            }
+        }
+        var studentlist = new Studentlist();
+
+        class Tableview{
+            constructor(data, selector){
+                this.data = data;
+                this.selector =  document.getElementById(selector)
+                
+            }
+            print(){
+                console.log(this.data, this.selector)
+            }
+            toogle(){
+                if(this.selector.hidden == true)
+                    this.selector.show();
+
+                
+            }
+        }
+
+        var form = document.querySelector("form");
+        form.addEventListener("submit", e =>{
+            e.preventDefault();
+            var data = {};
+            data.name = form.querySelector("input[name=name]").value;
+            console.log(data)
+
+            var aStudent = new Student(data.name);
+            studentlist.add(aStudent);
+
+            
+
+            form.reset();
+
+
+        })
+
+
+        var btn1 = document.getElementById("showhide");
+        btn1.addEventListener("click", ()=>{
+            
+            var divblock = document.querySelector("div");
+            if(divblock.hidden){
+                divblock.hidden = false;
+            }else{
+                divblock.hidden = true;
+            }
+            
+        })
+
+        var btn2 = document.getElementById('showTemp');
+        btn2.addEventListener('click', ()=>{
+            var temp = document.querySelector('template');
+            content = temp.content.cloneNode(true);
+            document.body.appendChild(content);
+
+        })
+       
+      
+        
+        var view = new Tableview(studentlist.list,"tableview");
+        
+
+        
+        
+
+    </script>
+    
+</body>
+</html>
